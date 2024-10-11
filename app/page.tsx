@@ -1,5 +1,16 @@
-import { K2kConnectFinal } from "@/components/k2k-connect-final"
+import { K2kConnectFinal } from "@/components/k2k-connect-final";
 
 export default function Page() {
-  return <K2kConnectFinal />
+  const {REACT_APP_SALES_CHAT_API_URL,REACT_APP_MARKET_INSIGHTS_API_URL,REACT_APP_MAGIC_BUTTON_API_URL,REACT_APP_PRODUCT_GUIDE_API_URL,
+    REACT_APP_PITCH_CREATOR_API_URL,
+    REACT_APP_FEEDBACK_API_URL,
+  } = process.env;
+
+  
+
+
+  return <K2kConnectFinal apiList={{REACT_APP_SALES_CHAT_API_URL,REACT_APP_MARKET_INSIGHTS_API_URL,REACT_APP_MAGIC_BUTTON_API_URL,REACT_APP_PRODUCT_GUIDE_API_URL,
+    REACT_APP_PITCH_CREATOR_API_URL,
+    REACT_APP_FEEDBACK_API_URL,
+  }}/>;
 }

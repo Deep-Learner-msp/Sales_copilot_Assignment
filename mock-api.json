@@ -1,0 +1,64 @@
+{
+  "sales-chat": [
+    {
+      "session_id": "12345",
+      "response": "Here’s some cybersecurity advice...",
+      "history": [
+        "Hello",
+        "Tell me about cybersecurity threats"
+      ],
+      "id": "7f94"
+    }
+  ],
+  "market-insights": [
+    {
+      "session_id": "12345",
+      "report": {
+        "latest_attacks": "Ransomware attack on XYZ",
+        "pain_points": "Security infrastructure weak points"
+      },
+      "history": [
+        "Tell me about XYZ company"
+      ],
+      "id": "2492"
+    }
+  ],
+  "magic-button": [
+    {
+      "session_id": "12345",
+      "updated_report": "Updated report with new details",
+      "response": "Here’s an updated analysis...",
+      "history": [
+        "Can you update the report?"
+      ],
+      "id": "25dd"
+    }
+  ],
+  "product-guide": [
+    {
+      "session_id": "12345",
+      "response": "This product is designed for cybersecurity...",
+      "history": [
+        "What is the feature of this product?"
+      ],
+      "id": "2b1a"
+    }
+  ],
+  "pitch-creator": [
+    {
+      "session_id": "12345",
+      "presentation": "Here’s your pitch presentation...",
+      "history": [
+        "Create a pitch for XYZ company"
+      ],
+      "id": "fe71"
+    }
+  ],
+  "feedback": [
+    {
+      "status": "success",
+      "message": "Thank you for your feedback!",
+      "id": "c9de"
+    }
+  ]
+}
