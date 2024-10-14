@@ -156,7 +156,7 @@ export function K2kConnectFinal({apiList}:any) {
         id: Date.now(),
       };
       debugger;
-     // const data :any= await axios.post(apiList.REACT_APP_MAGIC_BUTTON_API_URL, payload)
+      const data :any= await fetch(apiList.REACT_APP_MAGIC_BUTTON_API_URL, payload)
     let defaultApiRes={
       "session_id": "abc123",
       "updated_report": "After feedback, Company X has updated its security policies.",
@@ -164,8 +164,7 @@ export function K2kConnectFinal({apiList}:any) {
       "history": ["Please update the insights for Company X."]
     }
 
-      botMessage.content=defaultApiRes?.response;
-      //data[0]?.response;
+      botMessage.content=data[0]?.response||defaultApiRes?.response;
     setChatHistory((prev) => [...prev, botMessage]);
 
     
@@ -272,8 +271,9 @@ const ShowChatHistory: React.FC<ChatHistoryProps> = ({ allHistory, data }) => {
           };
         }
 
-      //  const response = await fetch(selectedFeature.endpoint, payload);
-    //  const data:any = await axios.post(selectedFeature.endpoint, payload)
+        debugger;
+        const res = await fetch(selectedFeature.endpoint, payload);
+        const data = await res.json();
         debugger;
         let  botMessage: Message = {
           type: "bot",
@@ -281,14 +281,17 @@ const ShowChatHistory: React.FC<ChatHistoryProps> = ({ allHistory, data }) => {
           timestamp: new Date().toISOString(),
           id: Date.now(),
         };
+       // botMessage.content=data[0]?.response;
+
+
         if(selectedFeature.label==="Sales Assistant"){
           const res ={
             "session_id": "abc123",
             "response": "The best way to improve cybersecurity is to implement strong access control policies.",
             "history": ["What are the best ways to improve cybersecurity?"]
           }
-          botMessage.content=res?.response
-          //||data?.[0].response;
+          botMessage.content=data?.[0].response||res?.response
+          
 
         }
         else if(selectedFeature.label==="Product Guide"){
@@ -297,8 +300,8 @@ const ShowChatHistory: React.FC<ChatHistoryProps> = ({ allHistory, data }) => {
             "response": "The best way to improve cybersecurity is to implement strong access control policies.",
             "history": ["What are the best ways to improve cybersecurity?"]
           }
-          botMessage.content=res?.response
-          //||data[0]?.response;
+          botMessage.content=data[0]?.response||res?.response
+          
 
         }
 
@@ -315,10 +318,10 @@ const ShowChatHistory: React.FC<ChatHistoryProps> = ({ allHistory, data }) => {
             
             }
             //||data[0];
-           let response=defaultRes
-           //||data[0] 
+           let response=data[0]|| defaultRes
+           
 
- debugger;
+ 
           botMessage.content=<Marketinsight data={response}/>;
         }
         else if(selectedFeature.label==="Pitch Creator"){
@@ -330,12 +333,13 @@ const ShowChatHistory: React.FC<ChatHistoryProps> = ({ allHistory, data }) => {
             "history": ["Generate a pitch for Company X."]
           }
           //||data?.[0]?.presentation;
-          const apidefaultres=apiRes.presentation
-          //||data?.[0]?.presentation;
+          const apidefaultres=data?.[0]?.presentation ||apiRes.presentation
+          
 
           botMessage.content = <ShowChatHistory allHistory={allHistory} data={apidefaultres}/>         
 
         }
+
 
         setChatHistory((prev) => [...prev, botMessage]);
         setAllHistory((prev) => ({
@@ -374,12 +378,12 @@ const ShowChatHistory: React.FC<ChatHistoryProps> = ({ allHistory, data }) => {
     if (message) {
       debugger;
       try {
-        // await axios.post(apiList.REACT_APP_FEEDBACK_API_URL, {
-        //   user_question: chatHistory[chatHistory.indexOf(message) - 1]?.content,
-        //   bot_answer: message.content,
-        //   timestamp: message.timestamp,
-        //   feedback: feedback,
-        // });
+        await axios.post(apiList.REACT_APP_FEEDBACK_API_URL, {
+          user_question: chatHistory[chatHistory.indexOf(message) - 1]?.content,
+          bot_answer: message.content,
+          timestamp: message.timestamp,
+          feedback: feedback,
+        });
         setShowToast(true);
         setToastMessage(`Feedback ${feedback === "like" ? "positive" : "negative"} submitted successfully`);
         setToastMode("success");
